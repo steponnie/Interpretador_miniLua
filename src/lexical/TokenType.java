@@ -8,57 +8,57 @@ public enum TokenType {
 
     // SYMBOLS
 	SEMI_COLON,			// ;
-  	COLON,					// ,
-  	DOT,						// .
-  	OPEN_PAR,				// (
+  	COLON,				// ,
+  	DOT,				// .
+  	OPEN_PAR,			// (
   	CLOSE_PAR,			// )
-    OPEN_BRA,				// [
+    OPEN_BRA,			// [
     CLOSE_BRA,			// ]
-    OPEN_CUR,				// {
+    OPEN_CUR,			// {
     CLOSE_CUR,			// }
     
     // OPERATORS
-	ASSIGN, 				// =
-  	AND,						// and
-  	OR, 						// or
-  	ADD, 						// +
-  	SUB,						// -
-  	MUL,						// *
-  	DIV, 						// /
-  	MOD,						// %
+	ASSIGN, 			// =
+  	AND,				// and
+  	OR, 				// or
+  	ADD, 				// +
+  	SUB,				// -
+  	MUL,				// *
+  	DIV, 				// /
+  	MOD,				// %
   	LOWER_THAN,			// <
-  	GREATER_THAN, 	// >
+  	GREATER_THAN, 	    // >
 	LOWER_EQUAL, 		// <=
-  	GREATER_EQUAL,	// >=
+  	GREATER_EQUAL,	    // >=
   	NOT_EQUAL,			// ~=
-  	CONCAT,					// ..
-  	EQUAL,					// ==
-  	SIZE,						// size
-  	NOT,						// not
+  	CONCAT,				// ..
+  	EQUAL,				// ==
+  	SIZE,				// size
+  	NOT,				// not
   
     // KEYWORDS
-  	IF,							// if
-  	THEN, 				  // then
-  	ELSEIF, 			  // elseif
-  	ELSE, 				  // else
-  	WHILE,  	 		  // while
-  	DO, 	 				  // do
-  	END, 		 			  // end
-  	REPEAT, 	 		  // repeat
-  	UNTIL, 		 		  // until
-  	FOR, 			 		  // for
-  	IN, 			 		  // in
+  	IF,					// if
+  	THEN, 				// then
+  	ELSEIF, 			// elseif
+  	ELSE, 				// else
+  	WHILE,  	 		// while
+  	DO, 	 			// do
+  	END, 		 		// end
+  	REPEAT, 	 		// repeat
+  	UNTIL, 		 		// until
+  	FOR, 			 	// for
+  	IN, 			 	// in
   	PRINT, 			    // print	 
-  	FALSE, 				  // false
-  	TRUE, 				  // true
-  	NIL, 					  // nil
-  	READ,						// read
-  	TONUMBER,				// tonumber
-  	TOSTRING,				// tostring
+  	FALSE, 				// false
+  	TRUE, 				// true
+  	NIL, 				// nil
+  	READ,				// read
+  	TONUMBER,			// tonumber
+  	TOSTRING,			// tostring
 
     // OTHERS
-    ID,             // identifier
-    NUMBER,         // integer
-    STRING          // string
+    ID,             	// identifier
+    NUMBER,         	// integer
+    STRING          	// string
 
 };
