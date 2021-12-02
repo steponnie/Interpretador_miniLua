@@ -37,7 +37,7 @@ public class SymbolTable {
       	st.put("~=", TokenType.NOT_EQUAL);
       	st.put("..", TokenType.CONCAT);
       	st.put("==", TokenType.EQUAL);
-      	st.put("size", TokenType.SIZE);
+      	st.put("#", TokenType.SIZE);
       	st.put("not", TokenType.NOT);
 
         // KEYWORDS

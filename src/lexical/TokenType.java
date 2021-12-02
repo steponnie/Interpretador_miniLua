@@ -33,7 +33,7 @@ public enum TokenType {
   	NOT_EQUAL,			// ~=
   	CONCAT,				// ..
   	EQUAL,				// ==
-  	SIZE,				// size
+  	SIZE,				// #
   	NOT,				// not
   
     // KEYWORDS
