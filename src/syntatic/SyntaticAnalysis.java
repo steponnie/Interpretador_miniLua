@@ -1,7 +1,9 @@
 package syntatic;
 
-import java.util.ArrayList;
-import java.util.List;
+//import java.util.ArrayList;
+//import java.util.List;
+
+//import javax.sound.sampled.SourceDataLine;
 
 /*import interpreter.command.BlocksCommand;
 import interpreter.command.Command;
@@ -171,6 +173,10 @@ public class SyntaticAnalysis {
                 procExpr();
             }
         } else if (current.type == TokenType.COLON || current.type == TokenType.IN) {
+            if(current.type == TokenType.COLON){
+                advance();
+                procName();
+            }
             advance();
             procExpr();
         }
@@ -388,12 +394,28 @@ public class SyntaticAnalysis {
     // <function> ::= (read | tonumber | tostring) '(' [ <expr> ] ')'
     private void procFunction() {
         if (current.type == TokenType.READ || current.type == TokenType.TONUMBER
-                || current.type == TokenType.TOSTRING) {
+                || current.type == TokenType.TOSTRING
+                ) {
             advance();
         }
         eat(TokenType.OPEN_PAR);
-        if (current.type == TokenType.AND || current.type == TokenType.OR) {
-            advance();
+        if (current.type == TokenType.AND || current.type == TokenType.OR || current.type == TokenType.OPEN_PAR ||
+            current.type == TokenType.SUB ||
+            current.type == TokenType.SIZEc||
+            current.type == TokenType.NOT ||
+            current.type == TokenType.NUMBER ||
+            current.type == TokenType.STRING ||
+            current.type == TokenType.FALSE ||
+            current.type == TokenType.TRUE ||
+            current.type == TokenType.NIL ||
+            current.type == TokenType.READ ||
+            current.type == TokenType.TONUMBER ||
+            current.type == TokenType.TOSTRING ||
+            current.type == TokenType.OPEN_CUR ||
+            current.type == TokenType.ID) {
+
+            procExpr();
+
         }
         eat(TokenType.CLOSE_PAR);
     }

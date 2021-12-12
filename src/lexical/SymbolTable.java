@@ -12,7 +12,7 @@ public class SymbolTable {
 				
         // SYMBOLS
       	st.put(";", TokenType.SEMI_COLON);
-      	st.put(":", TokenType.COLON);
+      	st.put(",", TokenType.COLON);
       	st.put(".", TokenType.DOT);
       	st.put("(", TokenType.OPEN_PAR);
       	st.put(")", TokenType.CLOSE_PAR);
