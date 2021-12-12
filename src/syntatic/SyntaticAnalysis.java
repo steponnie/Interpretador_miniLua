@@ -401,7 +401,7 @@ public class SyntaticAnalysis {
         eat(TokenType.OPEN_PAR);
         if (current.type == TokenType.AND || current.type == TokenType.OR || current.type == TokenType.OPEN_PAR ||
             current.type == TokenType.SUB ||
-            current.type == TokenType.SIZEc||
+            current.type == TokenType.SIZE||
             current.type == TokenType.NOT ||
             current.type == TokenType.NUMBER ||
             current.type == TokenType.STRING ||
