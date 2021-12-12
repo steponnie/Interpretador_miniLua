@@ -36,13 +36,13 @@ public class SyntaticAnalysis {
 
     private void advance() {
         System.out.println("Advanced (\"" + current.token + "\", " +
-        current.type + ")");
+                current.type + ")");
         current = lex.nextToken();
     }
 
     private void eat(TokenType type) {
         System.out.println("Expected (..., " + type + "), found (\"" +
-        current.token + "\", " + current.type + ")");
+                current.token + "\", " + current.type + ")");
         if (type == current.type) {
             current = lex.nextToken();
         } else {
@@ -55,14 +55,14 @@ public class SyntaticAnalysis {
 
         switch (current.type) {
             case INVALID_TOKEN:
-                System.out.printf("Lexema inválido [%s]\n", current.token);
+                System.out.printf("Invalid lexeme [%s]\n", current.token);
                 break;
             case UNEXPECTED_EOF:
             case END_OF_FILE:
-                System.out.printf("Fim de arquivo inesperado\n");
+                System.out.printf("Unexpected end of file\n");
                 break;
             default:
-                System.out.printf("Lexema não esperado [%s]\n", current.token);
+                System.out.printf("Lexeme not expected [%s]\n", current.token);
                 break;
         }
 
@@ -257,7 +257,7 @@ public class SyntaticAnalysis {
 
     // <concat> ::= <arith> { '..' <arith> }
     // private Expr procConcat() {
-    private void procConcat(){
+    private void procConcat() {
         // Expr expr = procArith();
         procArith();
         // FIXME: implement me!
@@ -345,9 +345,9 @@ public class SyntaticAnalysis {
                 current.type == TokenType.FALSE ||
                 current.type == TokenType.TRUE ||
                 current.type == TokenType.NIL) {
-            //Value<?> v = procConst();
+            // Value<?> v = procConst();
             procConst();
-            //int line = lex.getLine();
+            // int line = lex.getLine();
             // expr = new ConstExpr(line, v);
         } else if (current.type == TokenType.READ ||
                 current.type == TokenType.TONUMBER ||
@@ -401,8 +401,8 @@ public class SyntaticAnalysis {
     // <table> ::= '{' [ <elem> { ',' <elem> } ] '}'
     private void procTable() {
         eat(TokenType.OPEN_CUR);
-        if (current.type == TokenType.AND || current.type == TokenType.OR || current.type == TokenType.OPEN_BRA) {
-            advance();
+        if (current.type == TokenType.OPEN_BRA) {
+            procElem();
             while (current.type == TokenType.COLON) {
                 advance();
                 procElem();
@@ -413,13 +413,13 @@ public class SyntaticAnalysis {
 
     // <elem> ::= [ '[' <expr> ']' '=' ] <expr>
     private void procElem() {
-      if(current.type == TokenType.OPEN_BRA){
-        advance();
+        if (current.type == TokenType.OPEN_BRA) {
+            advance();
+            procExpr();
+            eat(TokenType.CLOSE_BRA);
+            eat(TokenType.ASSIGN);
+        }
         procExpr();
-        eat(TokenType.CLOSE_BRA);
-        eat(TokenType.ASSIGN);
-      }
-      procExpr();
     }
 
     private void procName() {
