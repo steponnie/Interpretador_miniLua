@@ -1,5 +1,6 @@
 package interpreter.command;
 
+
 import interpreter.expr.Expr;
 import interpreter.expr.Variable;
 import interpreter.util.Utils;
@@ -34,6 +35,14 @@ public class GenericForCommand extends Command {
         Value<?> expr_value = expr.expr();
         if (!(expr_value instanceof TableValue)) {
             Utils.abort(super.getLine());
+        }
+        TableValue tv = (TableValue) expr.expr();
+        for(Value<?> key : tv.value().keySet()){
+            this.var1.setValue(key);
+            if(var2 != null){
+                this.var2.setValue(tv.value().get(key));
+            }
+            cmds.execute();
         }
         // FIX ME!!!
         

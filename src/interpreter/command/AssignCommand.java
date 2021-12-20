@@ -19,6 +19,7 @@ public class AssignCommand extends Command {
 
     @Override
     public void execute() {
+        
         if(lhs.size() >= rhs.size()){
             int i;
             for(i = 0; i < rhs.size(); i = i + 1) {

@@ -18,7 +18,7 @@ public class IfCommand extends Command {
     public void execute() {
         if (expr.expr().eval()) {
             cmds.execute();
-        } else {
+        } else if (this.elseCmds != null){
             elseCmds.execute();
         }
         

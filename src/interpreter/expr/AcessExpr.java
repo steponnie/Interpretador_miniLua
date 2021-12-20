@@ -1,5 +1,6 @@
 package interpreter.expr;
 
+import interpreter.value.TableValue;
 import interpreter.value.Value;
 
 public class AcessExpr extends SetExpr {
@@ -15,14 +16,13 @@ public class AcessExpr extends SetExpr {
     
     @Override
     public Value<?> expr() {
-        // TODO Auto-generated method stub
-        return null;
+        TableValue table = (TableValue) base.expr(); 
+        Value <?> ret = table.value().get(index.expr());
+        return ret;
     }
     @Override
     public void setValue(Value<?> value) {
-        // TODO Auto-generated method stub
-        
+        TableValue table = (TableValue) base.expr(); 
+        table.value().put(index.expr(), value);       
     }
-
-    
 }

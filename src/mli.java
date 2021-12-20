@@ -1,8 +1,5 @@
-import interpreter.command.BlocksCommand;
 import interpreter.command.Command;
-import lexical.Lexeme;
 import lexical.LexicalAnalysis;
-import lexical.TokenType;
 import syntatic.SyntaticAnalysis;
 
 public class mli {
@@ -15,17 +12,17 @@ public class mli {
 
         try (LexicalAnalysis l = new LexicalAnalysis(args[0])) {
             
-            // O código a seguir é dado para testar o interpretador.
-            // TODO: descomentar depois que o analisador léxico estiver OK.
+            /*// O código a seguir é dado para testar o interpretador.
+            // descomentar depois que o analisador léxico estiver OK.*/
             SyntaticAnalysis s = new SyntaticAnalysis(l);
             Command c = s.start();
             //s.start();
             c.execute();
             
 
-            // O código a seguir é usado apenas para testar o analisador léxico.
-            // TODO: depois de pronto, comentar o código abaixo.
-            /*Lexeme lex;
+            /*// O código a seguir é usado apenas para testar o analisador léxico.
+            // depois de pronto, comentar o código abaixo.
+            Lexeme lex;
             do {
                 lex = l.nextToken();
                 System.out.printf("%02d: (\"%s\", %s)\n", l.getLine(),

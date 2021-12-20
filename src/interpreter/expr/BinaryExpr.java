@@ -275,8 +275,10 @@ public class BinaryExpr extends Expr {
             Boolean nb = valor.value() == true ? false : true;
             return new BooleanValue(nb);
         }
-        Utils.abort(super.getLine());
-        return null;
+        else {
+            Utils.abort(super.getLine());
+            return null;
+        }
     }
 
     public Value<?> orOp(Value<?> l, Value<?> r) {

@@ -1,14 +1,16 @@
 package interpreter.expr;
+
 import java.util.Scanner;
 
 import interpreter.util.Utils;
 import interpreter.value.BooleanValue;
 import interpreter.value.NumberValue;
 import interpreter.value.StringValue;
+import interpreter.value.TableValue;
 import interpreter.value.Value;
 
 public class UnaryExpr extends Expr {
-    
+
     private Expr expr;
     private UnaryOp op;
 
@@ -20,26 +22,40 @@ public class UnaryExpr extends Expr {
 
     @Override
     public Value<?> expr() {
-        Value<?> v = expr.expr();
-
+        Value<?> v;
         Value<?> ret = null;
         switch (op) {
             case Neg:
+                v = expr.expr();
                 ret = negOp(v);
                 break;
             case Size:
+                v = expr.expr();
                 ret = sizeOp(v);
                 break;
             case Not:
+                v = expr.expr();
                 ret = notOp(v);
                 break;
             case Read:
+                if (expr == null)
+                    v = null;
+                else
+                    v = expr.expr();
                 ret = readOp(v);
                 break;
             case ToNumber:
+                if (expr == null)
+                    v = null;
+                else
+                    v = expr.expr();
                 ret = toNumberOp(v);
                 break;
             case ToString:
+                if (expr == null)
+                    v = null;
+                else
+                    v = expr.expr();
                 ret = toStringOp(v);
                 break;
             default:
@@ -54,7 +70,7 @@ public class UnaryExpr extends Expr {
         if (v instanceof NumberValue) {
             NumberValue nv = (NumberValue) v;
             Double d = -nv.value();
-            
+
             ret = new NumberValue(d);
         } else if (v instanceof StringValue) {
             StringValue sv = (StringValue) v;
@@ -78,7 +94,7 @@ public class UnaryExpr extends Expr {
         if (v instanceof NumberValue) {
             NumberValue nv = (NumberValue) v;
             Double d = nv.value();
-            
+
             ret = new NumberValue(d);
         } else if (v instanceof StringValue) {
             StringValue sv = (StringValue) v;
@@ -90,6 +106,11 @@ public class UnaryExpr extends Expr {
             } catch (Exception e) {
                 Utils.abort(super.getLine());
             }
+        } else if (v instanceof TableValue) {
+            TableValue tv = (TableValue) v;
+            Double s = Double.valueOf(tv.value().size());
+
+            ret = new NumberValue(s);
         } else {
             Utils.abort(super.getLine());
         }
@@ -103,9 +124,9 @@ public class UnaryExpr extends Expr {
             BooleanValue nv = (BooleanValue) v;
 
             Boolean b = nv.eval() == true ? false : true;
-            
+
             ret = new BooleanValue(b);
-        }  else {
+        } else {
             Utils.abort(super.getLine());
         }
 
@@ -118,16 +139,14 @@ public class UnaryExpr extends Expr {
             StringValue sv = (StringValue) v;
             String s = sv.value();
 
-            System.out.print(s);          
-        } else {
+            System.out.print(s);
+        } else if (v != null) {
             Utils.abort(super.getLine());
         }
- 
-        Scanner scan = new Scanner(System.in);       
+
+        Scanner scan = new Scanner(System.in); // VERIFICAR ISSO AQUI
         String input = scan.nextLine();
         ret = new StringValue(input);
-        scan.close();
-
         return ret;
     }
 
@@ -136,20 +155,20 @@ public class UnaryExpr extends Expr {
         if (v instanceof NumberValue) {
             NumberValue nv = (NumberValue) v;
             Double d = nv.value();
-            
+
             ret = new NumberValue(d);
         } else if (v instanceof StringValue) {
             StringValue sv = (StringValue) v;
             String s = sv.value();
-            
+
             try {
                 Double d = Double.valueOf(s);
                 ret = new NumberValue(d);
             } catch (Exception e) {
-                Utils.abort(super.getLine());
+                ret = null;
             }
         } else {
-            Utils.abort(super.getLine());
+            ret = null;
         }
         return ret;
     }
@@ -159,8 +178,8 @@ public class UnaryExpr extends Expr {
         if (v instanceof NumberValue) {
             NumberValue nv = (NumberValue) v;
             Double d = nv.value();
-            
-            ret = new StringValue(d.toString());           
+
+            ret = new StringValue(d.toString());
         } else if (v instanceof StringValue) {
             StringValue sv = (StringValue) v;
             String s = sv.value();
@@ -172,7 +191,7 @@ public class UnaryExpr extends Expr {
 
             ret = new StringValue(b.toString());
         } else {
-            Utils.abort(super.getLine());
+            ret = null;
         }
 
         return ret;

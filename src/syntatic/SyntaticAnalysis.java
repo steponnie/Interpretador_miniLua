@@ -1,9 +1,8 @@
 package syntatic;
 
 import java.util.ArrayList;
-import java.util.Vector;
 import java.util.List;
-
+import java.util.Vector;
 
 import interpreter.command.AssignCommand;
 import interpreter.command.BlocksCommand;
@@ -28,7 +27,6 @@ import interpreter.expr.Variable;
 import interpreter.value.BooleanValue;
 import interpreter.value.NumberValue;
 import interpreter.value.StringValue;
-import interpreter.value.TableValue;
 import interpreter.value.Value;
 import lexical.Lexeme;
 import lexical.LexicalAnalysis;
@@ -129,36 +127,37 @@ public class SyntaticAnalysis {
         return cmd;
     }
 
-    // <if> ::= if <expr> then <code> { elseif <expr> then <code> } [ else <code> ] end
+    // <if> ::= if <expr> then <code> { elseif <expr> then <code> } [ else <code> ]
+    // end
     private IfCommand procIf() {
         eat(TokenType.IF);
         int line = lex.getLine();
-        Expr expr = procExpr();
+        Expr expr1 = procExpr();
         eat(TokenType.THEN);
         Command thenCmds = procCode();
-        IfCommand ifc = new IfCommand(line, expr, thenCmds);
+        IfCommand ifc = new IfCommand(line, expr1, thenCmds);
+        ArrayList<IfCommand> ifs = new ArrayList<>();
+        ifs.add(ifc);
 
-        IfCommand elseifc = null;
-
+        int i = 0;
         while (current.type == TokenType.ELSEIF) {
             advance();
             line = lex.getLine();
-            expr = procExpr();
+            Expr expr2 = procExpr();
             eat(TokenType.THEN);
-            thenCmds = procCode();
-            elseifc = new IfCommand(line, expr, thenCmds);
-            elseifc.setElseCommands(elseifc);
+            thenCmds = procCmd();
+            IfCommand elseifc = new IfCommand(line, expr2, thenCmds);
+            ifs.get(i).setElseCommands(elseifc);
+            ifs.add(elseifc);
+            i++;
         }
 
         if (current.type == TokenType.ELSE) {
             advance();
             Command elseCmds = procCode();
-            elseifc.setElseCommands(elseCmds);
+            ifs.get(i).setElseCommands(elseCmds);
         }
-
         eat(TokenType.END);
-
-        
         return ifc;
     }
 
@@ -188,7 +187,8 @@ public class SyntaticAnalysis {
         return rc;
     }
 
-    // <for> ::= for <name> (('=' <expr> ',' <expr> [',' <expr>]) | ([',' <name>] in <expr>)) do <code> end
+    // <for> ::= for <name> (('=' <expr> ',' <expr> [',' <expr>]) | ([',' <name>] in
+    // <expr>)) do <code> end
     private Command procFor() {
         eat(TokenType.FOR);
         int line = lex.getLine();
@@ -311,12 +311,12 @@ public class SyntaticAnalysis {
         int line = lex.getLine();
         if (current.type == TokenType.LOWER_THAN) {
             op = BinaryOp.LowerThanOp;
-            advance();           
+            advance();
             right = procConcat();
             expr = new BinaryExpr(line, expr, op, right);
         } else if (current.type == TokenType.GREATER_THAN) {
             op = BinaryOp.GreaterThanOp;
-            advance();           
+            advance();
             right = procConcat();
             expr = new BinaryExpr(line, expr, op, right);
         } else if (current.type == TokenType.LOWER_EQUAL) {
@@ -328,7 +328,8 @@ public class SyntaticAnalysis {
             op = BinaryOp.GreaterEqualOp;
             advance();
             right = procConcat();
-            expr = new BinaryExpr(line, expr, op, right);;
+            expr = new BinaryExpr(line, expr, op, right);
+            ;
         } else if (current.type == TokenType.NOT_EQUAL) {
             op = BinaryOp.NotEqualOp;
             advance();
@@ -338,7 +339,8 @@ public class SyntaticAnalysis {
             op = BinaryOp.EqualOp;
             advance();
             right = procConcat();
-            expr = new BinaryExpr(line, expr, op, right);;
+            expr = new BinaryExpr(line, expr, op, right);
+            ;
         }
         return expr;
     }
@@ -443,21 +445,26 @@ public class SyntaticAnalysis {
 
     // <lvalue> ::= <name> { '.' <name> | '[' <expr> ']' }
     private SetExpr procLValue() {
-        Variable expr = procName();
+        SetExpr expr = procName();
         int line = lex.getLine();
+
         while (current.type == TokenType.DOT || current.type == TokenType.OPEN_BRA) {
             if (current.type == TokenType.DOT) {
                 advance();
-                Expr index = procName();
-                // AcessExpr expr = new AcessExpr(line, expr, index);
+                Variable index = procName();
+                index.setValue(new StringValue(index.getName()));
+
+                AcessExpr acessExpr = new AcessExpr(line, expr, index);
+                expr = (AcessExpr) acessExpr;
             } else {
-                eat(TokenType.OPEN_BRA);
+                advance();
                 Expr index = procExpr();
-                // AcessExpr expr = new AcessExpr(line, expr, index);
+
+                AcessExpr acessExpr = new AcessExpr(line, expr, index);
+                expr = (AcessExpr) acessExpr;
                 eat(TokenType.CLOSE_BRA);
             }
         }
-        // FIX ME!!!!!
         return expr;
     }
 
@@ -552,7 +559,15 @@ public class SyntaticAnalysis {
         eat(TokenType.OPEN_CUR);
         int line = lex.getLine();
         TableExpr expr = new TableExpr(line);
-        if (current.type == TokenType.OPEN_BRA) {
+        if (current.type == TokenType.OPEN_BRA || current.type == TokenType.AND ||
+                current.type == TokenType.OR || current.type == TokenType.OPEN_PAR ||
+                current.type == TokenType.SUB || current.type == TokenType.SIZE ||
+                current.type == TokenType.NOT || current.type == TokenType.NUMBER ||
+                current.type == TokenType.STRING || current.type == TokenType.FALSE ||
+                current.type == TokenType.TRUE || current.type == TokenType.NIL ||
+                current.type == TokenType.READ || current.type == TokenType.TONUMBER ||
+                current.type == TokenType.TOSTRING || current.type == TokenType.OPEN_CUR ||
+                current.type == TokenType.ID) {
             elem = procElem();
             expr.addEntry(elem.key, elem.value);
             while (current.type == TokenType.COLON) {
@@ -582,7 +597,6 @@ public class SyntaticAnalysis {
     private Variable procName() {
         String name = current.token;
         eat(TokenType.ID);
-
         int line = lex.getLine();
         Variable var = new Variable(line, name);
         return var;

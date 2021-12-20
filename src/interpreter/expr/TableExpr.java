@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import interpreter.value.NumberValue;
 import interpreter.value.TableValue;
 import interpreter.value.Value;
 
@@ -27,8 +28,11 @@ public class TableExpr extends Expr{
     @Override
     public Value<?> expr() {
         Map<Value<?>, Value<?>> var = new HashMap<Value<?>, Value<?>>();
-        for(TableEntry entry : table)
-            var.put(entry.key.expr(), entry.value.expr());
+        int i = 1;
+        for(TableEntry entry : table) {
+            var.put(entry.key == null ? new NumberValue(Double.valueOf(i)) : entry.key.expr(), entry.value.expr());
+            i++;
+        }
         TableValue nt = new TableValue(var);
         return nt;
     }

@@ -15,7 +15,7 @@ public class RepeatCommand extends Command {
 
     @Override
     public void execute() {
-        while(expr.expr().eval()){
+        while(expr.expr().eval() == false){
             cmds.execute();
         }      
     }
