@@ -43,7 +43,7 @@ public class NumericForCommand extends Command {
             if (expr3 == null) {
                 var.setValue(expr1_value);
                 Variable cont = var;
-                while ((double) cont.expr().value() < (double) expr2_value.value()) {
+                while ((double) cont.expr().value() <= (double) expr2_value.value()) {
                     cmds.execute();
 
                     Double v = Double.valueOf((double) cont.expr().value() + 1);
@@ -53,7 +53,7 @@ public class NumericForCommand extends Command {
             } else {
                 var.setValue(expr1_value);
                 Variable cont = var;
-                while ((double) cont.expr().value() < (double) expr2_value.value()) {
+                while ((double) cont.expr().value() <= (double) expr2_value.value()) {
                     cmds.execute();
 
                     Double v = Double.valueOf((double) cont.expr().value() + (double) expr3.expr().value());

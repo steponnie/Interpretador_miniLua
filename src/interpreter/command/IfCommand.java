@@ -6,6 +6,7 @@ public class IfCommand extends Command {
 
     private Expr expr;
     private Command cmds;
+    private Command elseCmds;
     
     public IfCommand(int line, Expr expr, Command cmds) {
         super(line);
@@ -15,8 +16,16 @@ public class IfCommand extends Command {
 
     @Override
     public void execute() {
-        // TODO Auto-generated method stub
+        if (expr.expr().eval()) {
+            cmds.execute();
+        } else {
+            elseCmds.execute();
+        }
         
+    }
+
+    public void setElseCommands(Command elseCmds) {
+        this.elseCmds = elseCmds;
     }
     
 }

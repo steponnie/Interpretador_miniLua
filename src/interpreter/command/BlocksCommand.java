@@ -13,8 +13,9 @@ public class BlocksCommand extends Command {
 
     @Override
     public void execute() {
-        for (Command cmd : cmds)
+        for (Command cmd : cmds) {
             cmd.execute();
+        }
     }
 
 }

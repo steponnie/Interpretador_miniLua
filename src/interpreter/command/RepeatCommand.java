@@ -11,13 +11,13 @@ public class RepeatCommand extends Command {
         super(line);
         this.cmds = cmds;
         this.expr = expr;
-        //TODO Auto-generated constructor stub
     }
 
     @Override
     public void execute() {
-        // TODO Auto-generated method stub
-        
+        while(expr.expr().eval()){
+            cmds.execute();
+        }      
     }
     
 }

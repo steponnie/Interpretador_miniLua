@@ -24,15 +24,15 @@ public class AssignCommand extends Command {
             for(i = 0; i < rhs.size(); i = i + 1) {
                 Expr right = rhs.get(i);
                 Value<?> v = right.expr();
-    
+                
                 SetExpr left = lhs.get(i);
-                left.setValue(v);
+                left.setValue(v);               
             }
             for(int j = i; j < lhs.size(); j = j + 1) {             
                 Value<?> v = null;
 
                 SetExpr left = lhs.get(j);
-                left.setValue(v);
+                left.setValue(v);             
             }
 
         } else if(rhs.size() > lhs.size()){
