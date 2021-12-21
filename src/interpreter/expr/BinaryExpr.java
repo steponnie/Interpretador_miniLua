@@ -226,41 +226,33 @@ public class BinaryExpr extends Expr {
             NumberValue valor1 = (NumberValue) l;
             NumberValue valor2 = (NumberValue) r;
             if (valor1.value().equals(valor2.value())) {
-                Boolean diferente = false;
-                return new BooleanValue(diferente);
+                return new BooleanValue(false);
             } else {
-                Boolean diferente = true;
-                return new BooleanValue(diferente);
+                return new BooleanValue(true);
             }
         } else if ((l instanceof StringValue) && (r instanceof StringValue)) {
             StringValue valor1 = (StringValue) l;
             StringValue valor2 = (StringValue) r;
             if (valor1.value().equals(valor2.value())) {
-                Boolean diferente = false;
-                return new BooleanValue(diferente);
+                return new BooleanValue(false);
             } else {
-                Boolean diferente = true;
-                return new BooleanValue(diferente);
+                return new BooleanValue(true);
             }
         } else if ((l instanceof BooleanValue) && (r instanceof BooleanValue)) {
             BooleanValue valor1 = (BooleanValue) l;
             BooleanValue valor2 = (BooleanValue) r;
             if (valor1.value().equals(valor2.value())) {
-                Boolean diferente = false;
-                return new BooleanValue(diferente);
+                return new BooleanValue(false);
             } else {
-                Boolean diferente = true;
-                return new BooleanValue(diferente);
+                return new BooleanValue(true);
             }
         } else if ((l instanceof TableValue) && (r instanceof TableValue)) {
             TableValue valor1 = (TableValue) l;
             TableValue valor2 = (TableValue) r;
             if (valor1.value().equals(valor2.value())) {
-                Boolean diferente = false;
-                return new BooleanValue(diferente);
+                return new BooleanValue(false);
             } else {
-                Boolean diferente = true;
-                return new BooleanValue(diferente);
+                return new BooleanValue(true);
             }
         } else {
             Utils.abort(super.getLine());
@@ -269,49 +261,70 @@ public class BinaryExpr extends Expr {
     }
 
     public Value<?> equalOp(Value<?> l, Value<?> r) {
-        Value<?> ret = notEqualOp(l, r);
-        if (ret instanceof BooleanValue) {
-            BooleanValue valor = (BooleanValue) ret;
-            Boolean nb = valor.value() == true ? false : true;
-            return new BooleanValue(nb);
-        }
-        else {
+        if ((l instanceof NumberValue) && (r instanceof NumberValue)) {
+            NumberValue valor1 = (NumberValue) l;
+            NumberValue valor2 = (NumberValue) r;
+            if (valor1.value().equals(valor2.value())) {
+                return new BooleanValue(true);
+            } else {
+                return new BooleanValue(false);
+            }
+        } else if ((l instanceof StringValue) && (r instanceof StringValue)) {
+            StringValue valor1 = (StringValue) l;
+            StringValue valor2 = (StringValue) r;
+            if (valor1.value().equals(valor2.value())) {
+                return new BooleanValue(true);
+            } else {
+                return new BooleanValue(false);
+            }
+        } else if ((l instanceof BooleanValue) && (r instanceof BooleanValue)) {
+            BooleanValue valor1 = (BooleanValue) l;
+            BooleanValue valor2 = (BooleanValue) r;
+            if (valor1.value().equals(valor2.value())) {
+                return new BooleanValue(true);
+            } else {
+                return new BooleanValue(false);
+            }
+        } else if ((l instanceof TableValue) && (r instanceof TableValue)) {
+            TableValue valor1 = (TableValue) l;
+            TableValue valor2 = (TableValue) r;
+            if (valor1.value().equals(valor2.value())) {
+                return new BooleanValue(true);
+            } else {
+                return new BooleanValue(false);
+            }
+        } else {
             Utils.abort(super.getLine());
             return null;
         }
     }
 
     public Value<?> orOp(Value<?> l, Value<?> r) {
-        if (!(l instanceof BooleanValue) || !(r instanceof BooleanValue)) {
-            Utils.abort(super.getLine());
-            return null;
-        } else {
+        if (l instanceof BooleanValue && r instanceof BooleanValue){
             BooleanValue valor1 = (BooleanValue) l;
             BooleanValue valor2 = (BooleanValue) r;
             if (valor1.value() || valor2.value()) {
-                Boolean ou = true;
-                return new BooleanValue(ou);
-            } else {
-                Boolean ou = false;
-                return new BooleanValue(ou);
+                return new BooleanValue(true);
             }
+            return new BooleanValue(false);
         }
+        Utils.abort(super.getLine());
+        return null;
     }
 
     public Value<?> andOp(Value<?> l, Value<?> r) {
-        if (!(l instanceof BooleanValue) || !(r instanceof BooleanValue)) {
-            Utils.abort(super.getLine());
-            return null;
-        } else {
+        if (l instanceof BooleanValue && r instanceof BooleanValue){
             BooleanValue valor1 = (BooleanValue) l;
             BooleanValue valor2 = (BooleanValue) r;
             if (valor1.value() && valor2.value()) {
-                Boolean e = true;
-                return new BooleanValue(e);
-            } else {
-                Boolean e = false;
-                return new BooleanValue(e);
-            }
-        }
+                return new BooleanValue(true);
+            } 
+            return new BooleanValue(false);
+        } 
+        /*else if(valor do l ou do r igual a nil){
+            return new BooleanValue(false);
+        }*/
+        Utils.abort(super.getLine());
+        return null;
     }
 }
