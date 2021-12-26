@@ -9,7 +9,7 @@
 
 ### Comandos
 
-#### if
+* #### if
 #### while
 #### repeat
 #### for
