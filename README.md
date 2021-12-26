@@ -1,5 +1,8 @@
 # Interpretador_miniLua
 
+## Roteiro do trabalho:
+http://rimsa.com.br/documents/lectures/decom009/homeworks/2021_2/tp1/TP1.pdf
+
 ## Integrantes:
 
 * Luísa Oliveira Vicente
