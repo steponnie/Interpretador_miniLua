@@ -31,6 +31,11 @@ for var1, var2 in expr do
 ```
 **expr** deve ser uma tabela, onde cada iteração **var1** recebe um índice e **var2** seu correspondente; **var2** é opcional, assim apenas chave **var1** é usada.
 #### print
+```
+print()
+print("Hello World")
+print(2 .. 3)
+```
 Imprimir na tela com nova linha
 #### atribuição
 ```
@@ -68,7 +73,7 @@ Elementos separados por vírgulas entre abre e fecha chaves. Os valores são ind
 #### Variáveis
 Começam com **_** ou letras, seguidos de **_**, letras ou digitos.
 #### Literais
-Númeors, strings e lógicos.
+Números, strings e lógicos.
 #### Dinâmicos
 Tabelas.
 
@@ -82,7 +87,7 @@ Tabelas.
 * Divisão: **/**
 * Resto: **%**
 #### String
-* Concatenação: **..**
+* Concatenação:   **..**  
 Funciona apenas com strings e números.
 #### Lógico
 * Igualdade: **==**
@@ -93,9 +98,9 @@ Funciona com todos os tipos.
 Funciona apenas entre números.
 * Maior: **>**
 Funciona apenas entre números.
-* Menor Igual: **<==**
+* Menor Igual: **<=**
 Funciona apenas entre números.
-* Maior Igual: **>==**
+* Maior Igual: **>=**
 Funciona apenas entre números.
 * Negação: **not**
 Funciona com todos os tipos.
@@ -108,8 +113,7 @@ var2 = read("Entre com o proximo valor:")
 Ler uma linha do teclado, sem o caracter de nova linha **(\n)**. Obrigatóriamente deve haver conteúdo entre os parênteses.
 #### tonumber
 ```
-var1 = tonumber(exp[i])
-var2 = tonumber("2")
+var1 = tonumber("2")
 ```
 Converter o número ou string em número, **nil** se não for possível ou for outro tipo.
 #### tostring
