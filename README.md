@@ -22,7 +22,7 @@ for var = expr1, expr2, expr3 do
     ...
     end
 ```
-    Itera de **expr1** até **expr2** usando **expr3** como passo para incrementar **var**. **expr3** é opcional, assume-se o valor 1 se não estiver presente.
+Itera de **expr1** até **expr2** usando **expr3** como passo para incrementar **var**. **expr3** é opcional, assume-se o valor 1 se não estiver presente.
 * Genérico:
 ```
 for var1, var2 in expr do
