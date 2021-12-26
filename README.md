@@ -14,14 +14,22 @@
 #### while
     Repetir comandos enquanto a expressão for verdadeira.
 #### repeat
-    Executar comandos e repeti se a expressão for falsa.
+    Executar comandos e repetir se a expressão for falsa.
 #### for
 * Numérico: 
-```for var1, var2 in expr do
+```
+for var = expr1, expr2, expr3 do
     ...
-    end```
+    end
+```
+    Itera de **expr1** até **expr2** usando **expr3** como passo para incrementar **var**. **expr3** é opcional, assume-se o valor 1 se não estiver presente.
+* Genérico:
+```
+for var1, var2 in expr do
+    ...
+    end
+```
 
-* Genérico
 #### print
 #### atribuição
 
