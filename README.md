@@ -9,11 +9,18 @@
 
 ### Comandos
 
-* #### if
+#### if
+    Executar comandos se a expressão for verdadeira.
 #### while
+    Repetir comandos enquanto a expressão for verdadeira.
 #### repeat
+    Executar comandos e repeti se a expressão for falsa.
 #### for
-* Numérico
+* Numérico: 
+```for var1, var2 in expr do
+    ...
+    end```
+
 * Genérico
 #### print
 #### atribuição
