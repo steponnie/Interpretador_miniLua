@@ -114,7 +114,7 @@ public class UnaryExpr extends Expr {
             Utils.abort(super.getLine());
         }
 
-        Scanner scan = new Scanner(System.in); // VERIFICAR ISSO AQUI
+        Scanner scan = new Scanner(System.in);
         String input = scan.nextLine();
         ret = new StringValue(input);
         return ret;

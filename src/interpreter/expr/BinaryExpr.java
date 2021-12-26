@@ -319,7 +319,6 @@ public class BinaryExpr extends Expr {
                 return new BooleanValue(true);
             }
         } else {
-            // Utils.abort(super.getLine());
             return new BooleanValue(false);
         }
     }
@@ -358,7 +357,6 @@ public class BinaryExpr extends Expr {
                 return new BooleanValue(false);
             }
         } else {
-            // Utils.abort(super.getLine());
             return new BooleanValue(false);
         }
     }

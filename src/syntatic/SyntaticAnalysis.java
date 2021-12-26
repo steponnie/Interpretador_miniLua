@@ -50,14 +50,10 @@ public class SyntaticAnalysis {
     }
 
     private void advance() {
-        // System.out.println("Advanced (\"" + current.token + "\", " +
-        // current.type + ")");
         current = lex.nextToken();
     }
 
     private void eat(TokenType type) {
-        // System.out.println("Expected (..., " + type + "), found (\"" +
-        // current.token + "\", " + current.type + ")");
         if (type == current.type) {
             current = lex.nextToken();
         } else {
