@@ -95,18 +95,12 @@ public class UnaryExpr extends Expr {
     }
 
     public Value<?> notOp(Value<?> v) {
-        Value<?> ret = null;
-        if (v instanceof BooleanValue) {
-            BooleanValue nv = (BooleanValue) v;
-
-            Boolean b = nv.eval() == true ? false : true;
-
-            ret = new BooleanValue(b);
-        } else {
-            Utils.abort(super.getLine());
+        if (v == null) {
+            return new BooleanValue(true);
         }
-
-        return ret;
+        else {
+            return new BooleanValue(!v.eval());
+        }
     }
 
     public Value<?> readOp(Value<?> v) {

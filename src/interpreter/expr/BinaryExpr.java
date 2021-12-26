@@ -187,18 +187,22 @@ public class BinaryExpr extends Expr {
     }
 
     public Value<?> concatOp(Value<?> l, Value<?> r) {
-        if (!(l instanceof StringValue) || !(r instanceof StringValue)) {
-            String valor1 = l.value().toString();
-            String valor2 = r.value().toString();
-            String frase = valor1 + valor2;
-            return new StringValue(frase);
-        } else {
+        if (l == null || r == null ||l instanceof BooleanValue || r instanceof BooleanValue) {
+            Utils.abort(super.getLine());
+            return null;
+        }
+        else if((l instanceof StringValue) && (r instanceof StringValue)){
             StringValue valor1 = (StringValue) l;
             StringValue valor2 = (StringValue) r;
             String frase = valor1.value() + valor2.value();
             return new StringValue(frase);
         }
-
+        else{
+            String valor1 = l.value().toString();
+            String valor2 = r.value().toString();
+            String frase = valor1 + valor2;
+            return new StringValue(frase);
+        }
     }
 
     public Value<?> greaterEqualOp(Value<?> l, Value<?> r) {
@@ -372,7 +376,10 @@ public class BinaryExpr extends Expr {
     }
 
     public Value<?> andOp(Value<?> l, Value<?> r) {
-        if (l.eval()) {
+        if (l == null) {
+            return null;
+        }
+        else if (l.eval()) {
             return r;
         }
         return l;
