@@ -32,7 +32,7 @@ public class GenericForCommand extends Command {
 
     @Override
     public void execute() {
-        if ((expr.expr()) == null && !(expr.expr() instanceof TableValue)) {
+        if ((expr.expr()) == null || !(expr.expr() instanceof TableValue)) {
             Utils.abort(super.getLine());
         }
         TableValue tv = (TableValue) expr.expr();
@@ -42,8 +42,6 @@ public class GenericForCommand extends Command {
                 this.var2.setValue(tv.value().get(key));
             }
             cmds.execute();
-        }
-        // FIX ME!!!
-        
+        }        
     }
 }

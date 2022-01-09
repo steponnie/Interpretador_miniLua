@@ -454,7 +454,7 @@ public class SyntaticAnalysis {
             } else {
                 advance();
                 Expr index = procExpr();
-
+                
                 AcessExpr acessExpr = new AcessExpr(line, expr, index);
                 expr = (AcessExpr) acessExpr;
                 eat(TokenType.CLOSE_BRA);

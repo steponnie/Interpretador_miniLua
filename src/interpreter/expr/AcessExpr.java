@@ -1,5 +1,6 @@
 package interpreter.expr;
 
+import interpreter.util.Utils;
 import interpreter.value.TableValue;
 import interpreter.value.Value;
 
@@ -16,9 +17,15 @@ public class AcessExpr extends SetExpr {
 
     @Override
     public Value<?> expr() {
-        TableValue table = (TableValue) base.expr();
-        Value<?> ret = table.value().get(index.expr());
-        return ret;
+        if (base.expr() instanceof TableValue && index.expr() != null) {
+            TableValue table = (TableValue) base.expr();
+            Value<?> ret = table.value().get(index.expr());
+            return ret;
+        } else {
+            Utils.abort(super.getLine());
+            return null;
+        }
+        
     }
 
     @Override

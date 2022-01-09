@@ -216,8 +216,6 @@ public class BinaryExpr extends Expr {
                 Boolean menor = true;
                 return new BooleanValue(menor);
             }
-        } else if (l.getClass().equals(r.getClass())) {
-            return new BooleanValue(false);
         } else {
             Utils.abort(super.getLine());
             return null;
@@ -235,8 +233,6 @@ public class BinaryExpr extends Expr {
                 Boolean menor = true;
                 return new BooleanValue(menor);
             }
-        } else if (l.getClass().equals(r.getClass())) {
-            return new BooleanValue(false);
         } else {
             Utils.abort(super.getLine());
             return null;
@@ -254,8 +250,6 @@ public class BinaryExpr extends Expr {
                 Boolean menor = true;
                 return new BooleanValue(menor);
             }
-        } else if (l.getClass().equals(r.getClass())) {
-            return new BooleanValue(false);
         } else {
             Utils.abort(super.getLine());
             return null;
@@ -273,12 +267,6 @@ public class BinaryExpr extends Expr {
                 Boolean menor = true;
                 return new BooleanValue(menor);
             }
-        } else if (l == null && r != null) {
-            return new BooleanValue(false);
-        } else if (r == null && l != null) {
-            return new BooleanValue(false);
-        } else if (!(l.getClass().equals(r.getClass()))) {
-            return new BooleanValue(false);
         } else {
             Utils.abort(super.getLine());
             return null;

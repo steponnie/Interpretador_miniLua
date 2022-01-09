@@ -1,0 +1,12 @@
+Entre com uma expressao:
+  Proximo elemento:   Proximo elemento:   Proximo elemento:   Proximo elemento:   Proximo elemento:   Proximo elemento:   Proximo elemento:   Proximo elemento:   Proximo elemento:   Proximo elemento: Operacoes:
+  add(1, 2): 3
+  mul(3, 3): 9
+  sub(9, 1): 8
+  div(8, 4): 2
+
+Estatisticas:
+  1 adicao
+  1 substracao
+  1 multiplicacao
+  1 divisao

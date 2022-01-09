@@ -1,0 +1,17 @@
+Entre com a dimensao: Entre com valor na posicao 1x1: Entre com valor na posicao 1x2: Entre com valor na posicao 1x3: Entre com valor na posicao 2x1: Entre com valor na posicao 2x2: Entre com valor na posicao 2x3: Entre com valor na posicao 3x1: Entre com valor na posicao 3x2: Entre com valor na posicao 3x3: {
+  [0] = {
+    [0] = 1
+    [1] = 9
+    [2] = 5
+  }
+  [1] = {
+    [0] = 3
+    [1] = 7
+    [2] = 8
+  }
+  [2] = {
+    [0] = 10
+    [1] = 4
+    [2] = 2
+  }
+} = 358
